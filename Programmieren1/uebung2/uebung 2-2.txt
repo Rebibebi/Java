@@ -1,0 +1,79 @@
+Rebecca Vogt (Hörerin), Matrikelnummer 03-054-889
+Programmierung 1, Universität Bern, HS 2018
+
+Übung 2-2
+
+Frage 1: 
+Primitive Datentypen erhalten einen Wert zugewiesen, der direkt
+im Speicher abgelegt wird. Es gibt 8 primitive Datentypen:
+byte, short, integer, long, double, float, boolean und char. Die ersten
+6 der genannten sind durch den unterschiedlich grossen Speicherplatz und Art des Wertes (Ganzzahlen
+und Gleitkommazahlen), den
+sie belegen können, unterschieden. Dem Datentyp boolean können nur die Wahrheitswerte
+'true' oder 'false' zugewiesen werden und char speichert ein einzelnes Zeichen (Buchstabe,
+Zahl oder gewisse Sonderzeichen) ab.
+
+Referenzdatentypen sind Verweise auf ein Objekt. Dazu zählt der Datentyp String.
+String ist eine Klasse, die bei Java in der Systemlibrary enthalten ist.
+Weil sie häufig verwendet wird, muss sie nicht wie andere Klassen 
+durch den 'new' Befehl instantiiert werden, sondern wird wie ein primitiver Datentyp erzeugt.
+
+
+Frage 2:
+
+1 definiert eine Klasse A
+2 definiert eine lokale, private Variable a welche mit dem Wert 3 initialisiert wird
+3 definiert die Methode increment, die den Wert von a um 1 erhöht
+4 definiert die Methode toString, die den neuen Wert von a als String ausgibt
+5 Ende der Klasse A
+
+7 definiert eine Klasse B
+8 definiert die main-Methode
+9 erzeugt ein neues Objekt a1 der Klasse A
+10 erzeugt ein neues Objekt a2 der Klasse A
+11 Objekt a1 durchläuft Methode increment aus der Klasse A
+12 gibt die Werte von a1 und a2 aus
+13 Objektvariable a1 verweist auf das Objekt der Objektvariable a2
+14 Objekt a2 durchläuft Methode increment aus der Klasse A
+15 gibt die Werte von a1 und a2 aus 
+
+17 ein neues Objekt s1 der Klasse String mit dem Wert "ROCK" wird erzeugt
+18 einem Objekt s2 der Klasse String wird der Wert von s1 zugewiesen
+19 Objekt s2 durchläuft Methode toLowerCase aus der Klasse String, 
+   wodurch alle Buchstaben in Kleinbuchstaben umgewandelt werden
+20 gibt die Werte von s1 und s2 aus
+
+22 einer Variable j vom Datentyp integer wird der Wert 1 zugewiesen
+23 einer Variable i vom Datentyp integer wird der Wert der Variable j zugewiesen
+24 erhöht den Wert der Variable j um 1
+25 gibt die Werte von j und i aus
+
+Ausgabe: 
+4/3
+5/5
+ROCK/rock
+2/1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
