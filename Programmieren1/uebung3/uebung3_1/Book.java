@@ -3,8 +3,8 @@ package uebung3_1;
 //Programmierung 1, Universität Bern, HS 2018
 //
 //Übung 3-1
-
-
+//
+//gittest
 import java.util.Date;
 import java.util.Scanner;
 import java.text.*;
