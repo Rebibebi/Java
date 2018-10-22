@@ -7,25 +7,23 @@ public class Order {
 
 // Objektvariablen
 	
-	private int id;
+	private static int ID;
 	private String customerName;
 	private String customerAddress;
-	static int orderIndex = 0;			// statischer Index für Order-Objekte
-	static private int BUCHMAX;			// Maximale Anzahl Buchobjekte pro Order-Objekt
+	private static int BUCHMAX = 5;			// Maximale Anzahl Buchobjekte pro Order-Objekt
 	private ArrayList<Book> buchMenge = new ArrayList<Book>();
-	
 
+//Statische Variable, die jedem Book-Objekt eine fortlaufende ID zuweist
 	public Order()
 	{
-		
-		
+		ID++;
 	}
 	
 // Ausgabe eines Order-Objektes als String
 	
 	public String toString() 
 	{
-		String ausgabe = "Order id: " + id + ", Customer: " + customerName + ", " + customerAddress + "\n" + getBookString();
+		String ausgabe = "Order id: " + ID + ", Customer: " + customerName + ", " + customerAddress + getBookString() + "\n" + "Total price: " + getTotalPrice() + " CHF";
 		return ausgabe;
 	}
 	
@@ -33,10 +31,10 @@ public class Order {
 	
 	public void addBook(Book a)
 	{
-		if (buchMenge.size() <= BUCHMAX)  //Bookobjekte nur hinzufügen, sofern weniger als 5 bereits enthalten
-		{
+		if (buchMenge.size() < BUCHMAX)  //Bookobjekte nur hinzufügen, sofern weniger als 5 bereits enthalten
+			{
 			buchMenge.add(a);	
-		}
+			}
 	}
 	
 // Setter-Methoden für Order-Objekte
@@ -57,12 +55,24 @@ public class Order {
 	{
 		String buecher = "";
 		for (Book b: buchMenge)
-		//while (count <= buchMenge.size())  //Bookobjekte so lange ausgeben, bis alle abgearbeitet sind
-		{
-		buecher = buecher + b.toString();
-		
+		{											//Bookobjekte so lange ausgeben, bis alle abgearbeitet sind
+		buecher = buecher + "\n" + b.toString();
 		}
+		
 		return buecher;
+	}
+	
+// Getter-Methode für Preistotal
+	
+	public int getTotalPrice()
+	{
+		int preisTotal = 0;
+		for (Book b: buchMenge)
+		{											//Bookobjekte so lange ausgeben, bis alle abgearbeitet sind
+			preisTotal = preisTotal + b.getPrice();
+		}
+		
+		return preisTotal;	
 	}
 	
 }

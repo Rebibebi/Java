@@ -28,11 +28,14 @@ public class Book
 		
 	}
 	
-	public Book(int pid, String ptitle, String pname, Date pdateOfPublication, int pprice) {
+	public Book(int pid, String ptitle, String pname, Date pdateOfPublication, int pprice) 
+	{
 		id = pid;
 		title = ptitle;
 		author = pname;
 		dateOfPublication = pdateOfPublication;
+			if (pprice < 0) 
+				pprice = 0;
 		price = pprice;
 	}
 
@@ -40,7 +43,7 @@ public class Book
 	/** Returns a String representation of the book */
 	public String toString()
 	{
-		String ausgabe = "ID: " + id + "\n" + "Titel: " + title + "\n" + "Autor: " + author + "\n" + "Publikationsdatum: " + dateToString(dateOfPublication) + "\n" + "Tage vergangen seit Publikation: " + ageBook + "\n" + "Preis: " + price + "\n";
+		String ausgabe = id + ", " + title + ", " + author + ", " + dateToString(dateOfPublication) + ", " + price + " CHF";
 		return ausgabe;
 	}
 
