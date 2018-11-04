@@ -7,6 +7,8 @@ package uebung4;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuessOrc {
 
@@ -61,16 +63,62 @@ public class GuessOrc {
 	 * @param guessedMineShaftId the guessed mine shaft.
 	 * @return the id for a hint in HINT.
 	 */
-	public int calculateHint( int guessedMineShaftId ) {
-		Scanner scan = new Scanner();
-		scan.nextInt(System.out.println(guessInput()));
+	public void calculateHint(int guessedMineShaftId) {
+		//guessedMineShaftId = UserInputValid();
+		List<Integer> hintList = new ArrayList<>();
+		if (mineShaftId < guessedMineShaftId)
+			hintList.add(Integer.valueOf(1));
+		if (mineShaftId > guessedMineShaftId)
+			hintList.add(Integer.valueOf(2));
+		if ((movesMade()%2 == 1) && (guessedMineShaftId%2 == 0))
+			hintList.add(Integer.valueOf(3));
+		if ((movesMade()%2 == 0) && (guessedMineShaftId%2 == 1))
+			hintList.add(Integer.valueOf(4));
+		if ((mineShaftId-guessedMineShaftId) <= -5 || (mineShaftId-guessedMineShaftId) >=5 )
+			hintList.add(Integer.valueOf(5));
+		System.out.println("Hintlist: " + hintList);
 	}
 	
-	private String guessInput () {
-		String askInput = "Please enter your " + getMovesAsString() + " guess:";
-		return askInput;
+
+// UserInputValid initiates and repeats getUserInput method as long as userInput is invalid.
+// validitycheck by returnvalue from getUserInput. -1 means invalid.
+	
+	private int UserInputValid() {
+		int userInput = -1;
+			while (userInput == -1) {
+				userInput = getUserInput();
+			}
+			return userInput;
+	}
+
+// getUserInput is initiated by UserInputValid, checks userInput if it is an int and parses if possible.
+// returns -1 in case input was invalid.
+
+	private int getUserInput() {
+		int userGuessInt;
+		System.out.println("Please enter your " + getMovesAsString() + " guess:");
+		Scanner scan = new Scanner(System.in);
+		boolean guessIsInt = scan.hasNextInt();
+		
+		if (guessIsInt == true) {
+			userGuessInt = scan.nextInt();
+			userGuessInt = userGuessInt - 1; // Corrects userinput to ID
+			scan.nextLine();
+		} else {
+			
+			char userGuessChar = (scan.nextLine()).charAt(0);
+			userGuessInt = getColumnAsInt(userGuessChar);
+		}
+		
+		if (userGuessInt < 0 || userGuessInt >= MINE_SHAFTS) {
+				System.out.println("Please enter an integer between 1 and " + MINE_SHAFTS);
+				return -1;
+		}
+		
+		return userGuessInt;
 	}
 				
+// getMovesAsString delivers a String to getUserInput depending on the number of moves made.
 	
 	private String getMovesAsString() {
 			switch (movesMade()) {
@@ -84,10 +132,16 @@ public class GuessOrc {
 				return "fourth";
 			case 4:
 				return "fifth";
-			case 5:
+			default:
 				return "last";
+			}
 	}
 
+	private void setOrcChieftain() {
+		Random randomNumber = new Random();
+		mineShaftId  = randomNumber.nextInt(12);
+		System.out.println("Orc-Chieftain in Mineshaft " + mineShaftId);
+	}
 	/**
 	 * Implement the game logic here.
 	 */
@@ -95,6 +149,9 @@ public class GuessOrc {
 		System.out.println(generateOrcIntroScreen());
 		System.out.println("\n");
 		System.out.println(generateMapIntro());
+		setOrcChieftain();
+		//UserInputValid();
+		calculateHint(UserInputValid());	
 	}
 
 
@@ -416,7 +473,9 @@ public class GuessOrc {
 				+ "| |#| |#| |#| |#| |#| |#|" + "\n"
 				+ "|#| |#| |#| |#| |#| |#| |" + "\n"
 				+ "| |#| |#| |#| |#| |#| |#|" + "\n"
-				+ "|#| |#| |#| |#| |#| |#| |";
+				+ "|#| |#| |#| |#| |#| |#| |" + "\n"
+				+ getLine() + "\n"
+				+ getLine();
 		return mapImage;
 		
 	}
