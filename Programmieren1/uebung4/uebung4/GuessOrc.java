@@ -64,7 +64,6 @@ public class GuessOrc {
 	 * @return the id for a hint in HINT.
 	 */
 	public void calculateHint(int guessedMineShaftId) {
-		//guessedMineShaftId = UserInputValid();
 		List<Integer> hintList = new ArrayList<>();
 		if (mineShaftId < guessedMineShaftId)
 			hintList.add(Integer.valueOf(1));
@@ -137,6 +136,8 @@ public class GuessOrc {
 			}
 	}
 
+// sets the Orc chieftain in a randomized position between 0 and 11
+	
 	private void setOrcChieftain() {
 		Random randomNumber = new Random();
 		mineShaftId  = randomNumber.nextInt(12);
@@ -150,7 +151,6 @@ public class GuessOrc {
 		System.out.println("\n");
 		System.out.println(generateMapIntro());
 		setOrcChieftain();
-		//UserInputValid();
 		calculateHint(UserInputValid());	
 	}
 
