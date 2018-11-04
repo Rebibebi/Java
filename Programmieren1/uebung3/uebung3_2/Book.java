@@ -1,7 +1,6 @@
 package uebung3_2;
 
 import java.util.Date;
-import java.util.Scanner;
 import java.text.*;
 
 public class Book
@@ -10,7 +9,7 @@ public class Book
 	private String title;
 	private String author;
 	private Date dateOfPublication;
-	private int ageBook;
+	private int ageBook; // Diese Variable wird in Übung 3-2 nicht verwendet und wird nur zur Hausaufgabenkontrolle im Code belassen!
 	private int price;
 
 	public static final String DATE_FORMAT = "dd.MM.yyyy";
@@ -39,6 +38,18 @@ public class Book
 		price = pprice;
 	}
 
+	/** Returns the age of the book in days since publication */
+	// Diese Methode wird in Übung 3-2 nicht verwendet und wird nur zur Hausaufgabenkontrolle im Code belassen!
+	
+	public int age()
+	{
+		Date datAktuell = new Date(); //aktuelles Systemdatum erzeugen
+		long datDiff = datAktuell.getTime()-dateOfPublication.getTime(); //Differenz in Millisekunden von aktuellem Datum und Publikationsdatum
+		long ageBooklong = datDiff / 86400000;
+		ageBook = (int)ageBooklong; //Differenz wird von Milisekunden in Tage umgerechnet
+		return ageBook; //int-Wert der Tage wird zurückgegeben
+	}
+	
 	
 	/** Returns a String representation of the book */
 	public String toString()
@@ -46,7 +57,6 @@ public class Book
 		String ausgabe = id + ", " + title + ", " + author + ", " + dateToString(dateOfPublication) + ", " + price + " CHF";
 		return ausgabe;
 	}
-
 
 
 	//Setter-Methods
